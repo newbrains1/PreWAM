@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="PreWAM: Exploring the Design of Latent Future Prediction for World-Action Modeling. Research, robot demonstrations, and evaluation results.">
+  <meta name="theme-color" content="#fbfaf7">
+  <meta property="og:title" content="PreWAM — Latent Future Prediction for World-Action Modeling">
+  <meta property="og:description" content="Exploring what to predict, and how to predict it, for robot policies.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://newbrains1.github.io/PreWAM/assets/images/real-world-poster.webp">
+  <title>PreWAM · World-Action Modeling</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <a class="wordmark" href="#top" aria-label="PreWAM home">Pre<span>WAM</span></a>
+  <nav aria-label="Page navigation"><a href="#demonstrations">Demos</a><a href="#method">Method</a><a href="#results">Results</a><a href="#citation">Cite</a></nav>
+</header>
+<main id="main">
+  <section class="hero page-width" id="top">
+    <p class="eyebrow">WORLD-ACTION MODELING</p>
+    <h1><span class="project-name">Pre<span>WAM</span></span><span class="paper-title">Exploring the Design of Latent Future Prediction<br class="desktop-break"> for World-Action Modeling</span></h1>
+    <div class="authors">
+      <a href="https://github.com/newbrains1">Wan Chi<sup>1,2</sup></a><span>Sen Li<sup>2,†</sup></span><span>Zihang Cui<sup>2,3</sup></span><span>Chuqin Huang<sup>2,4</sup></span><span>Yunlong Wang<sup>2</sup></span><span>Nanshan Deng<sup>2,5</sup></span><span>Yanjun Huang<sup>1</sup></span>
+    </div>
+    <div class="affiliations"><span><sup>1</sup>Tongji University</span><span><sup>2</sup>Rimbot</span><span><sup>3</sup>Xi’an University of Electronic Science and Technology</span><span><sup>4</sup>Southeast University</span><span><sup>5</sup>Tsinghua University</span></div>
+    <p class="correspondence">† Corresponding author</p>
+    <div class="paper-links"><a class="paper-link" href="assets/papers/PreWAM.pdf" target="_blank" rel="noopener">Read the paper <span aria-hidden="true">↗</span></a><a href="#demonstrations">Watch the robots <span aria-hidden="true">↓</span></a></div>
+  </section>
+
+  <section class="page-width demonstration" id="demonstrations" aria-labelledby="demo-heading">
+    <div class="section-line"><h2 id="demo-heading">PreWAM in the real world</h2><span>Dual-arm Piper · 1× speed</span></div>
+    <video controls playsinline preload="none" poster="assets/images/real-world-poster.webp" aria-label="PreWAM real-world manipulation demonstrations, shown at original speed">
+      <source src="assets/videos/prewam-real-world.mp4" type="video/mp4">
+      <a href="assets/videos/prewam-real-world.mp4">Download the demonstration video</a>.
+    </video>
+    <p class="caption">Single-arm pick-and-place, sequential stacking, and coordinated bimanual manipulation.</p>
+  </section>
+
+  <section class="page-width introduction" aria-labelledby="idea-heading">
+    <p class="section-label">THE QUESTION</p>
+    <h2 id="idea-heading">What should a robot learn<br>to predict about the future?</h2>
+    <div class="intro-copy"><p>A world-action model learns actions together with future prediction. The choice of prediction target matters: reconstructing pixels, forecasting video features, and predicting spatial semantic features provide different supervision.</p><p>PreWAM studies these choices, then learns how visual states change across temporal scales. Future prediction shapes the policy during training; deployment runs the VLM and action expert.</p></div>
+  </section>
+
+  <section class="page-width research-section" id="prediction-spaces" aria-labelledby="spaces-heading">
+    <div class="section-heading"><p class="section-label">PREDICTION SPACE</p><h2 id="spaces-heading">Start with what to predict.</h2><p>We compare DINOv3, Wan 2.1 VAE, and V-JEPA 2 targets in a shared policy framework. DINOv3 provides the strongest aggregate generalization among the tested configurations.</p></div>
+    <figure><a href="assets/images/representations.webp" target="_blank" rel="noopener" aria-label="Open prediction-space study figure at full size"><img src="assets/images/representations.webp" alt="Prediction-space comparison showing LIBERO and LIBERO-Plus success rates, attention visualizations, and motion readout results." loading="lazy" width="2000" height="833"></a><figcaption>Prediction targets influence both policy generalization and the motion information recoverable from learned representations. See Section 3 of the paper for the controlled study.</figcaption></figure>
+  </section>
+
+  <section class="method-band" id="method" aria-labelledby="method-heading">
+    <div class="page-width research-section">
+      <div class="section-heading"><p class="section-label">PREWAM</p><h2 id="method-heading">Learn changes. Predict across time.</h2><p>A shared Qwen VLM connects action generation with future prediction in a frozen DINOv3 feature space.</p></div>
+      <figure><a href="assets/images/framework.webp" target="_blank" rel="noopener" aria-label="Open PreWAM architecture figure at full size"><img src="assets/images/framework.webp" alt="PreWAM architecture: a shared VLM supplies action and world queries; an action expert generates actions, while a world predictor learns residual future states at multiple temporal scales." loading="lazy" width="1578" height="997"></a></figure>
+      <div class="method-notes"><div><h3><span class="method-dot residual"></span>Residual World Prediction</h3><p>Starting from a source visual state, the predictor estimates a feature change. Adding this residual reconstructs a future state.</p></div><div><h3><span class="method-dot temporal"></span>Temporal-Scale Prediction</h3><p>Horizon-conditioned world queries learn short-, medium-, and long-range transitions within a sampled clip.</p></div></div>
+      <p class="deployment-note">At deployment, only the VLM and action expert run. The target encoder and world predictor are training-time components.</p>
+    </div>
+  </section>
+
+  <section class="page-width research-section" id="results" aria-labelledby="results-heading">
+    <div class="section-heading"><p class="section-label">EVALUATION</p><h2 id="results-heading">Across tasks and embodiments.</h2><p>We evaluate on the LIBERO family, SimplerEnv, RoboTwin 2.0, and three real-world tasks. Selected success rates from the paper are reported below.</p></div>
+    <div class="table-scroll"><table><caption class="visually-hidden">Selected PreWAM benchmark results</caption><thead><tr><th scope="col">Benchmark</th><th scope="col">Evaluation</th><th scope="col" class="number">Success rate</th></tr></thead><tbody>
+      <tr><th scope="row">LIBERO</th><td>Average over four suites</td><td class="number">98.1<span>%</span></td></tr>
+      <tr><th scope="row">LIBERO-Plus</th><td>Average over seven perturbation categories</td><td class="number">79.1<span>%</span></td></tr>
+      <tr><th scope="row">SimplerEnv · Google</th><td>Visual Matching</td><td class="number">78.9<span>%</span></td></tr>
+      <tr><th scope="row">SimplerEnv · WidowX</th><td>Visual Matching</td><td class="number">69.8<span>%</span></td></tr>
+      <tr><th scope="row">RoboTwin 2.0</th><td>Mean of Clean and Randomized settings</td><td class="number">92.35<span>%</span></td></tr>
+    </tbody></table></div>
+    <p class="caption">Benchmark-specific evaluation protocols and baseline comparisons are provided in the paper.</p>
+    <div class="real-results"><h3>Real-world manipulation</h3><p>PreWAM achieves 90.0% mean stage-1 success and 61.7% mean full-task success across Basket, Stack, and Cup. Full-task success is 36.7% for π₀ and 68.3% for π₀.₅. Each policy is evaluated in 20 trials per task.</p></div>
+  </section>
+
+  <section class="page-width abstract-section" aria-labelledby="abstract-heading"><h2 id="abstract-heading">Abstract</h2><p id="paper-abstract">World-action models combine action generation with future prediction, allowing visual transitions to serve as supervision for policy learning. Our controlled study of prediction spaces shows that spatially structured semantic features support better overall generalization under visual perturbations and make motion information more readily recoverable from learned predictive representations. Building on these observations, we introduce PreWAM, a world-action model that organizes future supervision around state changes in a prediction space defined by pretrained DINO features. Specifically, Residual World Prediction jointly learns source-relative changes and their resulting future states to emphasize dynamic information while preserving future-state semantics. Temporal-Scale Prediction conditions world queries on temporal distance to capture both short-term local motion and longer-horizon state evolution. These predictive objectives jointly shape a shared vision-language backbone with action supervision during pretraining and downstream policy learning. Experiments across the LIBERO benchmark family, SimplerEnv, RoboTwin 2.0, and real-world robotic manipulation demonstrate strong manipulation performance and improved generalization and robustness under diverse distribution shifts.</p></section>
+
+  <section class="page-width citation-section" id="citation" aria-labelledby="citation-heading"><div class="section-line"><h2 id="citation-heading">Citation</h2><button type="button" id="copy-citation">Copy BibTeX</button></div><pre><code id="bibtex">@misc{chi2026prewam,
+  title  = {PreWAM: Exploring the Design of Latent Future Prediction
+            for World-Action Modeling},
+  author = {Wan Chi and Sen Li and Zihang Cui and Chuqin Huang
+            and Yunlong Wang and Nanshan Deng and Yanjun Huang},
+  year   = {2026}
+}</code></pre><p id="copy-status" role="status" aria-live="polite"></p></section>
+</main>
+<footer class="page-width"><a class="wordmark" href="#top">Pre<span>WAM</span></a><a href="mailto:2532900@tongji.edu.cn">2532900@tongji.edu.cn</a><span>Tongji University · Rimbot</span></footer>
+</body>
+</html>

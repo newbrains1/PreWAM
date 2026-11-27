@@ -22,7 +22,7 @@ Paper links point to https://arxiv.org/abs/2611.31901. Research-code links shoul
 
 The sole real-world video is the complete, 1×-speed horizontal demonstration provided by the authors, encoded to 1920×720 for web delivery. Scientific figures and reported numbers come from the PreWAM manuscript. The abstract is reproduced verbatim.
 
-The layout is implemented locally. JEPA-WAM and VLA-JEPA informed the content organization; GAWM informed the November 2026 typography and hierarchy refresh. Their code and assets are not redistributed. PreWAM retains its blue/orange identity.
+The layout is implemented locally. JEPA-WAM and VLA-JEPA informed the content organization; GAWM informed the November 2026 typography and hierarchy refresh. Their code and assets are not redistributed. The latest refinement uses charcoal text with restrained burnt-orange accents; scientific figures retain their original colors.
 
 ## Page structure
 

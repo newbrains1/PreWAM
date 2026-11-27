@@ -5,18 +5,19 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <meta content="PreWAM: Exploring the Design of Latent Future Prediction for World-Action Modeling. Research, robot demonstrations, and evaluation results." name="description"/>
-<meta content="#fbfaf7" name="theme-color"/>
+<meta content="#245b83" name="theme-color"/>
 <meta content="PreWAM — Latent Future Prediction for World-Action Modeling" property="og:title"/>
 <meta content="Exploring what to predict, and how to predict it, for robot policies." property="og:description"/>
 <meta content="website" property="og:type"/>
 <meta content="https://newbrains1.github.io/PreWAM/assets/images/real-world-poster.webp" property="og:image"/>
 <title>PreWAM · World-Action Modeling</title>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
-<link href="styles.css" rel="stylesheet"/>
+<link href="styles.css?v=20261127" rel="stylesheet"/>
 <script defer="" src="script.js"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
+<div class="page-shell">
 <header class="site-header">
 <a aria-label="PreWAM home" class="wordmark" href="#top">Pre<span>WAM</span></a>
 <nav aria-label="Page navigation"><a href="#abstract">Abstract</a><a href="#contributions">Contributions</a><a href="#demonstrations">Demos</a><a href="#prediction-spaces">Study</a><a href="#method">Method</a><a href="#results">Results</a></nav>
@@ -31,7 +32,7 @@
 <div class="affiliations"><span><sup>1</sup>Tongji University</span><span><sup>2</sup>Rimbot</span><span><sup>3</sup>Xi’an University of Electronic Science and Technology</span><span><sup>4</sup>Southeast University</span><span><sup>5</sup>Tsinghua University</span></div>
 <p class="correspondence">† Corresponding author</p>
 <div class="paper-links"><a class="paper-link" href="https://arxiv.org/abs/2611.31901" rel="noopener" target="_blank">Read the paper </a><a href="#demonstrations">Watch the robots </a></div>
-</section><section aria-labelledby="abstract-heading" class="page-width abstract-section" id="abstract"><h2 id="abstract-heading">Abstract</h2><p id="paper-abstract">World-action models combine action generation with future prediction, allowing visual transitions to serve as supervision for policy learning. Our controlled study of prediction spaces shows that spatially structured semantic features support better overall generalization under visual perturbations and make motion information more readily recoverable from learned predictive representations. Building on these observations, we introduce PreWAM, a world-action model that organizes future supervision around state changes in a prediction space defined by pretrained DINO features. Specifically, Residual World Prediction jointly learns source-relative changes and their resulting future states to emphasize dynamic information while preserving future-state semantics. Temporal-Scale Prediction conditions world queries on temporal distance to capture both short-term local motion and longer-horizon state evolution. These predictive objectives jointly shape a shared vision-language backbone with action supervision during pretraining and downstream policy learning. Experiments across the LIBERO benchmark family, SimplerEnv, RoboTwin 2.0, and real-world robotic manipulation demonstrate strong manipulation performance and improved generalization and robustness under diverse distribution shifts.</p></section>
+</section><section aria-labelledby="abstract-heading" class="page-width abstract-section" id="abstract"><h2 id="abstract-heading">Abstract</h2><p id="paper-abstract">World-action models combine action generation with future prediction, allowing visual transitions to serve as supervision for policy learning. Our controlled study of prediction spaces shows that spatially structured semantic features support better overall generalization under visual perturbations and make motion information more readily recoverable from learned predictive representations. </p><p>Building on these observations, we introduce PreWAM, a world-action model that organizes future supervision around state changes in a prediction space defined by pretrained DINO features. Specifically, <strong>Residual World Prediction</strong> jointly learns source-relative changes and their resulting future states to emphasize dynamic information while preserving future-state semantics. <strong>Temporal-Scale Prediction</strong> conditions world queries on temporal distance to capture both short-term local motion and longer-horizon state evolution. </p><p>These predictive objectives jointly shape a shared vision-language backbone with action supervision during pretraining and downstream policy learning. Experiments across the LIBERO benchmark family, SimplerEnv, RoboTwin 2.0, and real-world robotic manipulation demonstrate strong manipulation performance and improved generalization and robustness under diverse distribution shifts.</p></section>
 <section aria-labelledby="demo-heading" class="page-width demonstration" id="demonstrations">
 <div class="section-line"><h2 id="demo-heading">PreWAM in the real world</h2><span>Dual-arm Piper · 1× speed</span></div>
 <video aria-label="PreWAM real-world manipulation demonstrations, shown at original speed" controls="" playsinline="" poster="assets/images/real-world-poster.webp" preload="none">
@@ -63,5 +64,6 @@
 }</code></pre><p aria-live="polite" id="copy-status" role="status"></p></section>
 </main>
 <footer class="page-width"><a class="wordmark" href="#top">Pre<span>WAM</span></a><a href="mailto:2532900@tongji.edu.cn">2532900@tongji.edu.cn</a><span>Tongji University · Rimbot</span></footer>
+</div>
 </body>
 </html>
